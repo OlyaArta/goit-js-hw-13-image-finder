@@ -9,8 +9,8 @@ var e,t=arguments[3];!function(t,r){"object"==typeof exports&&"object"==typeof m
 },{"handlebars/dist/handlebars.runtime":"pAws"}],"ZBb8":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e=l(require("handlebars/dist/handlebars.runtime"));function l(e){return e&&e.__esModule?e:{default:e}}const n=e.default.template({1:function(e,l,n,t,a){var o,r=null!=l?l:e.nullContext||{},u=e.hooks.helperMissing,c=e.escapeExpression,s=e.lookupProperty||function(e,l){if(Object.prototype.hasOwnProperty.call(e,l))return e[l]};return"    <li class='gallery_item'>"+c("function"==typeof(o=null!=(o=s(n,"name")||(null!=l?s(l,"name"):l))?o:u)?o.call(r,{name:"name",hash:{},data:a,loc:{start:{line:3,column:29},end:{line:3,column:37}}}):o)+"\n      <img src='"+c("function"==typeof(o=null!=(o=s(n,"webformatURL")||(null!=l?s(l,"webformatURL"):l))?o:u)?o.call(r,{name:"webformatURL",hash:{},data:a,loc:{start:{line:4,column:16},end:{line:4,column:32}}}):o)+"' alt='' />\n    </li>\n"},compiler:[8,">= 4.3.0"],main:function(e,l,n,t,a){var o;return"<ul class='gallery'>\n"+(null!=(o=(e.lookupProperty||function(e,l){if(Object.prototype.hasOwnProperty.call(e,l))return e[l]})(n,"each").call(null!=l?l:e.nullContext||{},l,{name:"each",hash:{},fn:e.program(1,a,0),inverse:e.noop,data:a,loc:{start:{line:2,column:2},end:{line:6,column:11}}}))?o:"")+"</ul>"},useData:!0});var t=n;exports.default=t;
 },{"handlebars/dist/handlebars.runtime":"pAws"}],"cZF8":[function(require,module,exports) {
-
+function n(n){return fetch()}
 },{}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss");var e=a(require("./templates/gallery-card.hbs")),r=a(require("./templates/gallery-list.hbs")),s=a(require("./js/api"));function a(e){return e&&e.__esModule?e:{default:e}}
 },{"./sass/main.scss":"clu1","./templates/gallery-card.hbs":"yKEB","./templates/gallery-list.hbs":"ZBb8","./js/api":"cZF8"}]},{},["Focm"], null)
-//# sourceMappingURL=/goit-js-hw-13-image-finder/src.789b70e5.js.map
+//# sourceMappingURL=/goit-js-hw-13-image-finder/src.a2f03dba.js.map
