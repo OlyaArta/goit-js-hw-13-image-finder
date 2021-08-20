@@ -13,9 +13,14 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   </head>
   <body>
-    <form class="search-form" id="search-form">
-      <input type="text" name="query" autocomplete="off" placeholder="Search images..." />
-    </form>
-    <script src="./index.js"></script>
+    <div class="container">
+      <form class="search-form" id="search-form">
+        <input type="text" name="query" autocomplete="off" placeholder="Search images..." />
+      </form>
+      <div id="gallery"></div>
+      <button data-action="load-more" type="button">Load more</button>
+    </div>
+
+    <script src="./index.js" type="module"></script>
   </body>
 </html>
