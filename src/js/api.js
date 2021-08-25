@@ -1,18 +1,38 @@
-async function fetchGallery() {
-  try {
-    //  this.page = 1;
-    //  this.search = '';
-    const response = await fetch(
-      `https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${this.search}&page=${this.page}&per_page=12&key=22999065-3fa49f66c111c7f1f9c9e2a79`,
-    );
-    const newGallery = await response.json();
-    return newGallery;
-  } catch (error) {
-    console.error(error);
+const API_KEY = '22999065-3fa49f66c111c7f1f9c9e2a79';
+const BASE_URL = 'https://pixabay.com/api/';
+
+const opt = {
+  header: {
+    Authorization: API_KEY,
+  },
+};
+
+export default class ApiService {
+  constructor() {
+    this.page = 1;
+    this.searchQuery = '';
   }
 
-  // return fetch(`https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=что_искать&page=номер_страницы&per_page=12&key=22999065-3fa49f66c111c7f1f9c9e2a79
-  // `).then(response => response.json());
-}
+  fetchArticles() {
+    const url = `${BASE_URL}/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${API_KEY}`;
+    return fetch(url, opt)
+      .then(response => response.json())
+      .then(console.log);
+  }
 
-export default { fetchGallery };
+  newPage() {
+    this.page += 1;
+  }
+
+  clearPage() {
+    this.page = 1;
+  }
+
+  get query() {
+    return this.searchQuery;
+  }
+
+  set query(newQuery) {
+    this.searchQuery = newQuery;
+  }
+}
