@@ -5,7 +5,7 @@ import ApiService from './js/api';
 
 const refs = {
   searchForm: document.getElementById('search-form'),
-  galleryList: document.getElementById('gallery'),
+  galleryList: document.querySelector('.gallery'),
   loadMore: document.querySelector('[data-action="load-more"]'),
 };
 
@@ -16,11 +16,20 @@ refs.loadMore.addEventListener('click', onLoadMore);
 
 function onSearch(e) {
   e.preventDefault();
-  searchQuery = e.currentTarget.elements.query.value;
 
-  apiService.fetchArticles(searchQuery);
+  apiService.query = e.currentTarget.elements.query.value;
+  apiService.clearPage();
+  apiService.fetchArticles().then(appendMarkup);
 }
 
 function onLoadMore() {
-  apiService.fetchArticles(searchQuery);
+  apiService.fetchArticles().then(appendMarkup);
+}
+
+function appendMarkup(articles) {
+  refs.galleryList.insertAdjacentHTML('beforeend', galleryCard(articles));
+}
+
+function clearGallery() {
+  refs.galleryList.innerHTML = '';
 }
