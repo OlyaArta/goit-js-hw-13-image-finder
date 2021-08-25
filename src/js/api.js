@@ -18,10 +18,9 @@ export default class ApiService {
     const url = `${BASE_URL}/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${API_KEY}`;
     return fetch(url, opt)
       .then(response => response.json())
-      .then(data => {
+      .then(({ articles }) => {
         this.nextPage();
-
-        return data.articles;
+        return articles;
       });
   }
 
