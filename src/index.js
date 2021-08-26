@@ -46,11 +46,16 @@ function onLoadMore() {
   apiService.fetchArticles().then(articles => {
     clearGallery();
     appendMarkup(articles);
+    scroll();
     loadMoreBtn.enable();
-    refs.galleryList.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
-    });
+  });
+}
+
+function scroll() {
+  const element = document.getElementById('scroll');
+  element.scrollIntoView({
+    behavior: 'smooth',
+    block: 'end',
   });
 }
 
