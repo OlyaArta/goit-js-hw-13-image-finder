@@ -44,7 +44,7 @@ function onSearch(e) {
 function onLoadMore() {
   loadMoreBtn.disable();
   apiService.fetchArticles().then(articles => {
-    clearGallery();
+    //clearGallery();
     appendMarkup(articles);
     scroll();
     loadMoreBtn.enable();
