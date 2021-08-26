@@ -1,5 +1,10 @@
 import './sass/main.scss';
 
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/desktop/dist/PNotifyDesktop';
+import '@pnotify/core/dist/BrightTheme.css';
+import { pnotifyError, pnotifyNotice } from './js/pnotify';
+
 import galleryCard from './templates/gallery-card.hbs';
 import ApiService from './js/api';
 import LoadMoreBtn from './js/load-more-btn';
@@ -25,18 +30,15 @@ function onSearch(e) {
   clearGallery();
 
   apiService.query = e.currentTarget.elements.query.value;
-  // if (e.currentTarget.elements.query.value.trim() === '') {
-  //  return;
-  //}
+  if (e.currentTarget.elements.query.value.trim() === '') {
+    pnotifyNotice();
+    return;
+  }
+  e.currentTarget.elements.query.value = '';
   loadMoreBtn.show();
   apiService.clearPage();
   clearGallery();
   onLoadMore();
-
-  /*refs.loadMoreBtn.scrollIntoView({
-    behavior: 'smooth',
-    block: 'end',
-  });*/
 }
 
 function onLoadMore() {
@@ -45,6 +47,10 @@ function onLoadMore() {
     clearGallery();
     appendMarkup(articles);
     loadMoreBtn.enable();
+    refs.galleryList.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
   });
 }
 
