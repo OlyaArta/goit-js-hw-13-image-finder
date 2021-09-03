@@ -7,7 +7,7 @@ import { pnotifyError, pnotifyNotice } from './js/pnotify';
 
 import galleryCard from './templates/gallery-card.hbs';
 import ApiService from './js/api';
-import LoadMoreBtn from './js/load-more-btn';
+//import LoadMoreBtn from './js/load-more-btn';
 
 const refs = {
   searchForm: document.getElementById('search-form'),
@@ -16,13 +16,13 @@ const refs = {
 };
 
 const apiService = new ApiService();
-const loadMoreBtn = new LoadMoreBtn({
+/*const loadMoreBtn = new LoadMoreBtn({
   selector: '[data-action="load-more"]',
   hidden: true,
-});
+});*/
 
 refs.searchForm.addEventListener('submit', onSearch);
-loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
+//loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
 
 function onSearch(e) {
   e.preventDefault();
@@ -35,29 +35,30 @@ function onSearch(e) {
     return;
   }
   e.currentTarget.elements.query.value = '';
-  loadMoreBtn.show();
+  //loadMoreBtn.show();
   apiService.clearPage();
   clearGallery();
   onLoadMore();
 }
 
 function onLoadMore() {
-  loadMoreBtn.disable();
+  //loadMoreBtn.disable();
   apiService.fetchArticles().then(articles => {
     //clearGallery();
     appendMarkup(articles);
-    scroll();
-    loadMoreBtn.enable();
+
+    //scroll();
+    //loadMoreBtn.enable();
   });
 }
 
-function scroll() {
+/*function scroll() {
   const element = document.getElementById('scroll');
   element.scrollIntoView({
     behavior: 'smooth',
     block: 'end',
   });
-}
+}*/
 
 function appendMarkup(articles) {
   refs.galleryList.insertAdjacentHTML('beforeend', galleryCard(articles));
@@ -66,3 +67,21 @@ function appendMarkup(articles) {
 function clearGallery() {
   refs.galleryList.innerHTML = '';
 }
+
+// реализация бесконечного скролла //
+
+const onEntry = entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && apiService.query !== '') {
+      console.log(entry);
+      onLoadMore();
+    }
+  });
+};
+
+const options = {
+  rootMargin: '200px',
+};
+const observer = new IntersectionObserver(onEntry, options);
+
+observer.observe(document.querySelector('#sentinel'));
